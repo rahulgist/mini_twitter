@@ -1,6 +1,13 @@
 import React from "react";
 import { BsHeartFill } from "react-icons/bs";
-function Tweets({ allTweets, Loading }) {
+function Tweets({ allTweets, Loading ,getTweets}) {
+  const likeTweet = async (tweet) => {
+    await fetch(`https://apex.oracle.com/pls/apex/rahul_workspace/tweets/like?tweet=${tweet}`, {
+      method: "POST",
+    });
+    getTweets();
+  };
+
   return (
     <div className="container">
       <div className="row">
@@ -22,7 +29,12 @@ function Tweets({ allTweets, Loading }) {
             <div className="col-md-6 offset-md-2 border border-2 rounded-2 bg-secondary bg-opacity-25">
               <p>Date: {tweet.datetime}</p>
               <h4>{tweet.tweet}</h4>
-              <button className="btn btn-outline-dark border-0">
+              <button
+                onClick={()=>{
+                  likeTweet(tweet.tweet)
+                }}
+                className="btn btn-outline-dark border-0"
+              >
                 <BsHeartFill /> {tweet.likes}
               </button>
             </div>

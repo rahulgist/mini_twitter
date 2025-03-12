@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       <Header postTweet={postTweet} />
-      <Tweets allTweets={allTweets} Loading={Loading} />
+      <Tweets allTweets={allTweets} Loading={Loading} getTweets={getTweets} />
     </>
   );
 }
