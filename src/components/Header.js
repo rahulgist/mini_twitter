@@ -3,6 +3,12 @@ import { BsTwitter, BsPersonCircle } from "react-icons/bs";
 export default function Header({ postTweet }) {
   const [Tweet, setTweet] = useState("");
 
+  function addTweet(event) {
+    event.preventDefault();
+    postTweet(Tweet);
+    setTweet("");
+  }
+
   return (
     <div className="container">
       <div className="row">
@@ -15,7 +21,10 @@ export default function Header({ postTweet }) {
               <h4>Home</h4>
             </div>
             <div className="col-12">
-              <div className="row border border-2 border-start-0 border-end-0 py-2">
+              <form
+                onSubmit={addTweet}
+                className="row border border-2 border-start-0 border-end-0 py-2"
+              >
                 <div className="col-md-2">
                   <BsPersonCircle className="h1" />
                 </div>
@@ -28,20 +37,22 @@ export default function Header({ postTweet }) {
                     type="text"
                     className="form-control border-0"
                     placeholder="What's Happening ?"
+                    required
+                    minLength={5}
                   />
                 </div>
                 <div className="col-md-2 d-flex align-items-center">
-                  <button
+                  <button type="submit"
                     className="btn btn-primary w-100"
-                    onClick={() => {
-                      postTweet(Tweet);
-                      setTweet("");
-                    }}
+                    // onClick={() => {
+                    //   postTweet(Tweet);
+                    //   setTweet("");
+                    // }}
                   >
                     Tweet
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
