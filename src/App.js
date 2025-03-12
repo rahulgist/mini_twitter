@@ -26,13 +26,35 @@ function App() {
     getTweets();
   }
 
+  function sortTweetsByLikes() {
+    
+    let sortedArray = [...allTweets];
+    
+    sortedArray.sort((a, b) => b.likes - a.likes);
+    // console.log(allTweets);
+    setallTweets(sortedArray);
+  }
+
+  function sortByTitle(){
+    let sortedData = [...allTweets];
+    sortedData.sort((a, b) => a.tweet.localeCompare(b.tweet));
+    // console.log(allTweets);
+    setallTweets(sortedData);
+  };
+
+  function sortByDate(){
+    let sortedDateData = [...allTweets];
+    sortedDateData.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
+    setallTweets(sortedDateData);
+  };
+
   useEffect(() => {
     getTweets();
   }, []);
 
   return (
     <>
-      <Header postTweet={postTweet} />
+      <Header postTweet={postTweet} sortByDate={sortByDate} sortTweetsByLikes={sortTweetsByLikes} sortByTitle = {sortByTitle} />
       <Tweets allTweets={allTweets} Loading={Loading} getTweets={getTweets} />
     </>
   );
